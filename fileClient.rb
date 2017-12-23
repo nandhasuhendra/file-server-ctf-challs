@@ -5,12 +5,18 @@ class FileClient
   def initialize(ip, port)
     @socket = TCPSocket.new(ip, port)
 
-    send_file
-    get_response
+    @request = nil
+    @response = nil
+    
+    response
+    request
+    
+    @request.join
+    @response.join
   end
 
-  def send_file
-    #Thread.new do
+  def request
+    @request = Thread.new do
       filename = ask "[+] Input Filename -> "
       if File.exists? filename
         puts "[!] File #{filename} is available."
@@ -29,12 +35,13 @@ class FileClient
       else
         puts "[!] File doesn't available!"
       end
-    #end
+    end
   end
 
-  def get_response
-    Thread.new do
-      puts @socket.gets
+  def response
+    @response = Thread.new do
+      puts "AAA"
+      puts @socket.recv(1024)
     end
   end
 end
