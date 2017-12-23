@@ -28,7 +28,6 @@ class Libs::Server
             puts "[-] [#{Time.now.ctime}]: Client #{client.addr[2]} is disconnected."
             client.close
           end
-          client.close
         end
       end
     rescue => e
@@ -37,8 +36,6 @@ class Libs::Server
   end
 
   def send_respond(client, data)
-    loop {
-      client.send data, 0  
-    }
+    client.send "AAAAAAA", 0 
   end  
 end
