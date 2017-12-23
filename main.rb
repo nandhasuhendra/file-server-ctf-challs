@@ -11,10 +11,9 @@ ActiveSupport::Dependencies.autoload_paths += relative_load_paths
 
 
 if __FILE__ == $0
-  server = Libs::Server.new(31337)
   
   begin
-    server.runServer
+    server = Libs::Server.new(31337)
   rescue => e
     puts e
   end

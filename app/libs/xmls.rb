@@ -1,6 +1,7 @@
 class Libs::Xmls
   def initialize(file)
     @file = file
+    @docx = nil
   end
 
   def read
@@ -18,6 +19,28 @@ class Libs::Xmls
       end
     end
     
-    puts eval(tmp)
+    if filter_command(tmp)
+      set_docx("LOL")
+      #set_docx(eval(tmp))
+    else
+      set_docx("[!] [#{Time.now.ctime}]: Try Harder")
+    end
   end
+
+  def set_docx(tmp)
+    @docx = tmp
+  end
+
+  def get_docx
+    @docx
+  end
+
+  private
+    def filter_command(check)
+      if check =~ /`|system|exec|%x|popen|spwan/
+        return false
+      else
+        return true
+      end
+    end
 end

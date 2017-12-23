@@ -14,8 +14,8 @@ class Libs::Files
     end
 
     if isDocx(filename)
-      set_file(filename)
       puts "[!] [#{Time.now.ctime}]: #{client.addr[2]} is upload file \"#{file}\"."
+      set_file(filename)
       return true
     else
       puts "[!] [#{Time.now.ctime}]: \"#{file}\" has been delete"

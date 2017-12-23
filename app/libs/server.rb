@@ -1,9 +1,11 @@
 class Libs::Server
   def initialize(port)
     @server = TCPServer.new(port)
+
+    run
   end
   
-  def runServer
+  def run
     begin
       puts "[!] [#{Time.now.ctime}]: Server is running on port #{@server.addr[2]}"
       loop do
@@ -16,6 +18,8 @@ class Libs::Server
             if fileObj.create(client, file)
               readObj = Libs::Xmls.new(fileObj.get_file)
               readObj.read
+
+              send_respond(client, readObj.get_docx)
             else
               puts "[-] [#{Time.now.ctime}]: Client #{client.addr[2]} is disconnected."
               client.close
@@ -24,10 +28,17 @@ class Libs::Server
             puts "[-] [#{Time.now.ctime}]: Client #{client.addr[2]} is disconnected."
             client.close
           end
+          client.close
         end
       end
     rescue => e
       puts "[!] [#{Time.now.ctime}]: Error is founded => #{e}"
     end
   end
+
+  def send_respond(client, data)
+    loop {
+      client.send data, 0  
+    }
+  end  
 end
