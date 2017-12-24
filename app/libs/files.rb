@@ -4,23 +4,30 @@ class Libs::Files
     @file = nil
   end
   
-  def create(client, file)
+  def create(client, file, size)
     filename = @path + 'new_' + file + '.zip'
+    t = 0
 
     File.open(filename, 'wb') do |f|
       while buff = client.gets
+        t += buff.length
         f.write(buff)
+        break if t == size
       end
     end
+    puts "Size => #{size}"
+    puts "Temp => #{t}"
 
     if isDocx(filename)
       puts "[!] [#{Time.now.ctime}]: #{client.addr[2]} is upload file \"#{file}\"."
       set_file(filename)
       return true
+      $stdin.flush
     else
       puts "[!] [#{Time.now.ctime}]: \"#{file}\" has been delete"
       delete(filename)
       return false
+      $stdin.flush
     end
   end
 

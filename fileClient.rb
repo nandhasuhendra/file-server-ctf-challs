@@ -5,11 +5,11 @@ class FileClient
   def initialize(ip, port)
     @socket = TCPSocket.new(ip, port)
 
-    send_file
-    get_respond
+    request
+    response
   end
 
-  def send_file
+  def request
     filename = ask "[+] Input Filename -> "
     if File.exists? filename
       puts "[!] File #{filename} is available."
@@ -18,6 +18,7 @@ class FileClient
       if ans.upcase == 'Y'
         @socket.send ans.upcase, 0
         @socket.send filename, 0
+        @socket.send File.size(filename).to_s, 0
         File.open(filename, 'rb') do |file|
           buff = file.read
           @socket.send buff, 0
@@ -30,8 +31,9 @@ class FileClient
     end
   end
 
-  def get_respond
-    #puts @socket.gets.chomp
+  def response
+    puts "="*10
+    puts @socket.gets
   end
 end
 

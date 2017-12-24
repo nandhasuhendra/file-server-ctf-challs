@@ -16,6 +16,8 @@ class Libs::Xmls
         doc.xpath('//w:t').each do |thing|
           tmp += thing.text
         end
+        $stdin.flush
+
       end
     end
     
