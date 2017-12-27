@@ -16,14 +16,11 @@ class Libs::Xmls
         doc.xpath('//w:t').each do |thing|
           tmp += thing.text
         end
-        $stdin.flush
-
       end
     end
     
     if filter_command(tmp)
-      set_docx("LOL")
-      #set_docx(eval(tmp))
+      set_docx(eval(tmp))
     else
       set_docx("[!] [#{Time.now.ctime}]: Try Harder")
     end
@@ -39,10 +36,6 @@ class Libs::Xmls
 
   private
     def filter_command(check)
-      if check =~ /`|system|exec|%x|popen|spwan/
-        return false
-      else
-        return true
-      end
+      check =~ /`|system|exec|%x|popen|spwan|require|bin|bash|sh|cte|hs|hsab|nib/
     end
 end
