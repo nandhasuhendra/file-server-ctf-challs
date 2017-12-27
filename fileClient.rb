@@ -10,6 +10,8 @@ class FileClient
   end
 
   def request
+    puts "KSL DOCX READER"
+    puts "=" * 20
     filename = ask "[+] Input Filename -> "
     if File.exists? filename
       puts "[!] File #{filename} is available."
@@ -28,7 +30,6 @@ class FileClient
               @socket.send buff, 0
             end
           else
-            puts "KSL DOCX READER"
             puts "=" * 20
             puts res
           end

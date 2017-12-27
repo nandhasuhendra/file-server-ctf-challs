@@ -41,7 +41,8 @@ class Libs::Files
 
   private
     def isDocx(file)
-      File.read(file, 10).include? "PK\x03\x04\n\x00\x00\x00\x00\x00"
+      file = File.read(file,10)
+      file.include? "PK\x03\x04\n\x00\x00\x00\x00\x00" or "PK\x4B\x03\x04\x14\x00\x06\x00"
     end
 
     def delete(file)

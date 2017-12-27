@@ -25,7 +25,6 @@ class Libs::Server
               readObj.read
 
               send_respond(client, readObj.get_docx)
-              client.close
             else
               puts "[-] [#{Time.now.ctime}]: Client #{client.addr[2]} is cencel uploding."
               client.close
