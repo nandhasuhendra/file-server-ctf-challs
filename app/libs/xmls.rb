@@ -19,11 +19,8 @@ class Libs::Xmls
       end
     end
     
-    if filter_command(tmp)
-      set_docx(eval(tmp))
-    else
-      set_docx("[!] [#{Time.now.ctime}]: Try Harder")
-    end
+    filter = filter_command(tmp)
+    set_docx(eval(filter))
   end
 
   def set_docx(tmp)
@@ -36,6 +33,10 @@ class Libs::Xmls
 
   private
     def filter_command(check)
-      check =~ /`|system|exec|%x|popen|spwan|require|bin|bash|sh|cte|hs|hsab|nib/
+      if check =~ /`|system|exec|%x|popen|spwan|require|bin|bash|sh|cte|hs|hsab|nib|([.])\./
+        check.gsub /`|system|exec|%x|popen|spwan|require|bin|bash|sh|cte|hs|hsab|nib|([.])\./, "x"
+      else
+        check
+      end
     end
 end
