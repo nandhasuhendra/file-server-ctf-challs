@@ -24,7 +24,11 @@ class Libs::Server
               readObj = Libs::Xmls.new(fileObj.get_file)
               readObj.read
 
-              send_respond(client, readObj.get_docx)
+              readObj.get_docx.each do |str|
+                p str
+                send = str
+                send_respond(client, eval("send"))
+              end
             else
               puts "[-] [#{Time.now.ctime}]: Client #{client.addr[2]} is cencel uploding."
               client.close

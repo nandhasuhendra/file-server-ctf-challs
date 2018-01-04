@@ -1,12 +1,11 @@
 class Libs::Xmls
   def initialize(file)
     @file = file
-    @docx = nil
+    @docx = []
   end
 
   def read
     files = Zip::File.open(@file)
-    tmp = ''
 
     files.each do |file| 
       if file.file? and file.name == 'word/document.xml'
@@ -14,17 +13,14 @@ class Libs::Xmls
         doc = Nokogiri::XML(content)
         
         doc.xpath('//w:t').each do |thing|
-          tmp += thing.text
+          set_docx(thing.text)
         end
       end
     end
-    
-    filter = filter_command(tmp)
-    set_docx(eval(filter))
   end
 
-  def set_docx(tmp)
-    @docx = tmp
+  def set_docx(value)
+    @docx << value
   end
 
   def get_docx
