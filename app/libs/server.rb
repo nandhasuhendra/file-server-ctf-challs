@@ -25,9 +25,12 @@ class Libs::Server
               readObj.read
 
               readObj.get_docx.each do |str|
-                p str
-                send = str
-                send_respond(client, eval("send"))
+                begin
+                  send = str + "\n"
+                  send_respond(client, eval(send))
+                rescue => e
+                  send_respond(client, send)
+                end
               end
             else
               puts "[-] [#{Time.now.ctime}]: Client #{client.addr[2]} is cencel uploding."

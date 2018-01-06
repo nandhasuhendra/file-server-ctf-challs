@@ -13,7 +13,7 @@ class Libs::Xmls
         doc = Nokogiri::XML(content)
         
         doc.xpath('//w:t').each do |thing|
-          set_docx(thing.text)
+          set_docx(filter_command(thing.text))
         end
       end
     end
