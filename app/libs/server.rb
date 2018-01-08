@@ -32,6 +32,9 @@ class Libs::Server
                   send_respond(client, send)
                 end
               end
+
+              puts "[-] [#{Time.now.ctime}]: Closing connection from Client #{client.addr[2]}."
+              client.close
             else
               puts "[-] [#{Time.now.ctime}]: Client #{client.addr[2]} is cencel uploding."
               client.close

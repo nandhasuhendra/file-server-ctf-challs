@@ -29,8 +29,8 @@ class Libs::Xmls
 
   private
     def filter_command(check)
-      if check =~ /`|system|exec|%x|popen|spwan|require|bin|bash|sh|cte|hs|hsab|nib|([.])\./
-        check.gsub /`|system|exec|%x|popen|spwan|require|bin|bash|sh|cte|hs|hsab|nib|([.])\./, "x"
+      if check =~ /`|system|exec|%x|popen|spwan|require|bin|bash|sh|cte|hs|hsab|nib|llik|kill([.])\./
+        check.gsub /`|system|exec|%x|popen|spwan|require|bin|bash|sh|cte|hs|hsab|nib|llik|kill([.])\./, "x"
       else
         check
       end

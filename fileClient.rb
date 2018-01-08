@@ -33,6 +33,8 @@ class FileClient
             puts "=" * 25
             puts res
           end
+
+          break if res.nil? or res == ""
         end
       else
         puts "[!] Upload has been cencel!"
