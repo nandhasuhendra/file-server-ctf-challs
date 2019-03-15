@@ -10,7 +10,7 @@ class FileClient
   end
 
   def request
-    puts "KSL DOCX READER"
+    puts "KSL FILE READER"
     puts "=" * 25
     filename = ask "[+] Input Filename -> "
     if File.exists? filename

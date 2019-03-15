@@ -10,11 +10,10 @@ require "io/console"
 relative_load_paths = %w[app]
 ActiveSupport::Dependencies.autoload_paths += relative_load_paths
 
-
 if __FILE__ == $0
-  
   begin
-    server = Libs::Server.new(31337)
+    Libs::Server.new(31337)
+
     $stdin.flush
   rescue => e
     puts e

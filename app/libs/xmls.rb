@@ -1,7 +1,7 @@
 class Libs::Xmls
   def initialize(file)
-    @file = file
-    @docx = []
+    @file   = file
+    @output = []
   end
 
   def read
@@ -10,21 +10,21 @@ class Libs::Xmls
     files.each do |file| 
       if file.file? and file.name == 'word/document.xml'
         content = file.get_input_stream.read
-        doc = Nokogiri::XML(content)
+        is_xml = Nokogiri::XML(content)
         
-        doc.xpath('//w:t').each do |thing|
-          set_docx(filter_command(thing.text))
+        is_xml.xpath('//w:t').each do |thing|
+          set_xml(filter_command(thing.text))
         end
       end
     end
   end
 
-  def set_docx(value)
-    @docx << value
+  def set_xml(value)
+    @output << value
   end
 
-  def get_docx
-    @docx
+  def get_xml
+    @output
   end
 
   private
