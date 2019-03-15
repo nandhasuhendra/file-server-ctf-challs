@@ -1,6 +1,6 @@
 class Libs::Server
-  def initialize(port)
-    @server = TCPServer.new(port)
+  def initialize(ip_address, port)
+    @server = TCPServer.new(ip_address, port)
 
     run
   end

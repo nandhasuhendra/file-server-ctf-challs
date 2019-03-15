@@ -5,19 +5,19 @@ class Libs::Files
   end
   
   def create(client, filename, size)
-    if isFile(filename)
-      filename = @path + 'new_' + filename + '.zip'
-      t = 0
+    filename = @path + 'new_' + filename + '.zip'
+    t = 0
 
-      File.open(filename, 'wb') do |f|
-        loop do
-          buff  = client.recv(1024)
-          t    += buff.length
-          f.write(buff)
-          break if t == size.to_i
-        end
+    File.open(filename, 'wb') do |f|
+      loop do
+        buff  = client.recv(1024)
+        t    += buff.length
+        f.write(buff)
+        break if t == size.to_i
       end
+    end
 
+    if isFile(filename)
       puts "[!] [#{Time.now.ctime}], %-7.7s --: %s upload file %s." % ['SUCCESS', client.addr[2], filename]
       client.send 'Upload Succes !', 0
       set_file(filename)

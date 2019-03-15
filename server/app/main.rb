@@ -12,7 +12,7 @@ ActiveSupport::Dependencies.autoload_paths += relative_load_paths
 
 if __FILE__ == $0
   begin
-    Libs::Server.new(31337)
+    Libs::Server.new('0.0.0.0', 31337)
 
     $stdin.flush
   rescue => e

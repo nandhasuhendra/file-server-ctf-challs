@@ -46,5 +46,7 @@ class FileClient
 end
 
 if __FILE__ == $0
-  FileClient.new('127.0.0.1',31337)
+  # FileClient.new('127.0.0.1',31337)
+  # FileClient.new('172.17.0.2',31337)
+  FileClient.new('0.0.0.0',31337)
 end
